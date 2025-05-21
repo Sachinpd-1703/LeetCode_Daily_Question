@@ -1,0 +1,30 @@
+class Solution(object):
+    def setZeroes(self, matrix):
+        n = len(matrix)
+        count = {}
+        skip = []
+        for i in range(n):
+            nn = len(matrix[i])
+            freq = {}
+            for j in matrix[i]:
+                if j in freq:
+                    freq[j]+=1
+                else:
+                    freq[j]=1
+            #Storing Position
+            for k in range(nn):
+                if matrix[i][k]==0:
+                    if k in count:
+                        count[k]+=1
+                    else:
+                        count[k]=1
+            #Seting current to zeros
+            if 0 in freq:
+                matrix[i]=[0]*nn
+                skip.append(i)
+        #Seting rest to Zeros
+        for i in range(n):
+            if i in skip:
+                continue
+            for key in count :
+                matrix[i][key]=0
